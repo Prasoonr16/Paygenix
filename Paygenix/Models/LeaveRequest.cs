@@ -21,7 +21,6 @@ namespace Paygenix.Models
             [MaxLength(50)]
             public string LeaveType { get; set; }  
 
-            [Required]
             [MaxLength(50)]
             [Required(ErrorMessage = "Status is required.")]
             [RegularExpression(@"^(Approved|Not Approved)$", ErrorMessage = "Status must be either 'Approved' or 'Not Approved'.")]
