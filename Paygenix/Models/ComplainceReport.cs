@@ -12,7 +12,7 @@ namespace Paygenix.Models
         public int? EmployeeID { get; set; }  // Foreign Key to Employee
 
         [MaxLength(50)]
-        public string PayrollPeriod { get; set; }  
+        public DateTime PayrollIssued { get; set; }  
 
         [MaxLength(50)]
         public string ComplianceStatus { get; set; }
