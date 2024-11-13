@@ -17,11 +17,14 @@ namespace Paygenix.Models
             public string LastName { get; set; }  
 
             [Required]
-            [MaxLength(100)]
+            [Required(ErrorMessage = "Email is required.")]
+            [EmailAddress(ErrorMessage = "Invalid Email Address.")
             public string Email { get; set; }  
 
-            [MaxLength(15)]
-            public string Phone { get; set; }  
+            [MaxLength(10)]
+            [Required(ErrorMessage = "Phone number is required.")]
+            [Phone(ErrorMessage = "Invalid phone number.")]
+            public string PhoneNumber { get; set; }  
 
             [MaxLength(50)]
             public string Position { get; set; } 
