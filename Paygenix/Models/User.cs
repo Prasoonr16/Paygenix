@@ -6,6 +6,7 @@ namespace Paygenix.Models
     public class User
     {
         [Key]
+        [Required(ErrorMessage="UserID is required")]
         public int UserID { get; set; }  // Primary Key
 
         [Required]
@@ -13,7 +14,9 @@ namespace Paygenix.Models
         public string Username { get; set; }  
 
         [Required]
-        [MaxLength(20)]
+        [Required(ErrorMessage = "Password is required.")]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 100 characters.")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$", ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, and one number.")]
         public string PasswordHash { get; set; }
 
         [Required]
