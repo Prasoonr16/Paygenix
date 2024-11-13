@@ -16,9 +16,8 @@ namespace Paygenix.Models
             [MaxLength(50)]
             public string LastName { get; set; }  
 
-            [Required]
             [Required(ErrorMessage = "Email is required.")]
-            [EmailAddress(ErrorMessage = "Invalid Email Address.")
+            [EmailAddress(ErrorMessage = "Invalid Email Address.")]
             public string Email { get; set; }  
 
             [MaxLength(10)]
