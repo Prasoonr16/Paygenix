@@ -50,10 +50,10 @@ namespace Paygenix.Models
 
             [Required]
             [MaxLength(50)]
-            public string StartPeriod { get; set; }  
+            public DateTime StartPeriod { get; set; }  
             [Required]
             [MaxLength(50)]
-            public string EndPeriod { get; set; } 
+            public DateTime EndPeriod { get; set; } 
 
             public DateTime GeneratedDate { get; set; }  
 
