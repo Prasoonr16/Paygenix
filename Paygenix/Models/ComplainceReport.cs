@@ -27,10 +27,8 @@ namespace Paygenix.Models
 
         public string Comments { get; set; }  
 
-        [ForeignKey("EmployeeID")]
-        public Employee Employee { get; set; }  // Navigation property to Employee
-
-        [ForeignKey("GeneratedBy")]
-        public User User { get; set; }  // Navigation property to User who generated the report
+        //Navigation Properties
+        public Employee Employee { get; set; } 
+        public User GeneratedByUser { get; set; } 
     }
 }

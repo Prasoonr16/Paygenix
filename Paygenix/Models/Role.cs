@@ -8,6 +8,9 @@ namespace Paygenix.Models
         public int RoleID { get; set; }  // Primary Key
 
         [Required]
-        public string RoleName { get; set; }  
+        public string RoleName { get; set; }
+
+        //Navigation Property
+        public ICollection<User> Users { get; set; }
     }
 }
