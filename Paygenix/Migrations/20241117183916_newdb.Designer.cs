@@ -12,8 +12,8 @@ using Paygenix.Models;
 namespace Paygenix.Migrations
 {
     [DbContext(typeof(PayGenixDB))]
-    [Migration("20241113084437_NewDB")]
-    partial class NewDB
+    [Migration("20241117183916_newdb")]
+    partial class newdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Paygenix.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Paygenix.Models.Benefit", b =>
+            modelBuilder.Entity("Paygenix.Models.Benefits", b =>
                 {
                     b.Property<int>("BenefitID")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace Paygenix.Migrations
                     b.Property<int?>("EmployeeID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GeneratedBy")
+                    b.Property<int>("GeneratedByUserUserID")
                         .HasColumnType("int");
 
                     b.Property<string>("IssuesFound")
@@ -93,7 +93,7 @@ namespace Paygenix.Migrations
 
                     b.HasIndex("EmployeeID");
 
-                    b.HasIndex("GeneratedBy");
+                    b.HasIndex("GeneratedByUserUserID");
 
                     b.ToTable("ComplainceReports");
                 });
@@ -143,7 +143,9 @@ namespace Paygenix.Migrations
 
                     b.HasKey("EmployeeID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserID")
+                        .IsUnique()
+                        .HasFilter("[UserID] IS NOT NULL");
 
                     b.ToTable("Employee");
                 });
@@ -334,38 +336,39 @@ namespace Paygenix.Migrations
                 {
                     b.HasOne("Paygenix.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeID");
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Paygenix.Models.User", "User")
+                    b.HasOne("Paygenix.Models.User", "GeneratedByUser")
                         .WithMany()
-                        .HasForeignKey("GeneratedBy")
+                        .HasForeignKey("GeneratedByUserUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
 
-                    b.Navigation("User");
+                    b.Navigation("GeneratedByUser");
                 });
 
             modelBuilder.Entity("Paygenix.Models.Employee", b =>
                 {
                     b.HasOne("Paygenix.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
+                        .WithOne("Employee")
+                        .HasForeignKey("Paygenix.Models.Employee", "UserID");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Paygenix.Models.EmployeeBenefit", b =>
                 {
-                    b.HasOne("Paygenix.Models.Benefit", "Benefit")
-                        .WithMany()
+                    b.HasOne("Paygenix.Models.Benefits", "Benefit")
+                        .WithMany("EmployeeBenefits")
                         .HasForeignKey("BenefitID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Paygenix.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("EmployeeBenefits")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -378,7 +381,7 @@ namespace Paygenix.Migrations
             modelBuilder.Entity("Paygenix.Models.LeaveRequest", b =>
                 {
                     b.HasOne("Paygenix.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("LeaveRequests")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -389,7 +392,7 @@ namespace Paygenix.Migrations
             modelBuilder.Entity("Paygenix.Models.Payroll", b =>
                 {
                     b.HasOne("Paygenix.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("Payrolls")
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -400,12 +403,37 @@ namespace Paygenix.Migrations
             modelBuilder.Entity("Paygenix.Models.User", b =>
                 {
                     b.HasOne("Paygenix.Models.Role", "Role")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("RoleID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Paygenix.Models.Benefits", b =>
+                {
+                    b.Navigation("EmployeeBenefits");
+                });
+
+            modelBuilder.Entity("Paygenix.Models.Employee", b =>
+                {
+                    b.Navigation("EmployeeBenefits");
+
+                    b.Navigation("LeaveRequests");
+
+                    b.Navigation("Payrolls");
+                });
+
+            modelBuilder.Entity("Paygenix.Models.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Paygenix.Models.User", b =>
+                {
+                    b.Navigation("Employee")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

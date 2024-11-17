@@ -52,25 +52,22 @@ namespace Paygenix.Models
                 .WithMany(b => b.EmployeeBenefits)
                 .HasForeignKey(eb => eb.BenefitID);
 
-            //ComplainceReport and Employee (One-to-Many)
+            //ComplainceReport and Employee (One-to-One)
             modelBuilder.Entity<ComplainceReport>()
                 .HasOne(cr => cr.Employee)
                 .WithMany()
                 .HasForeignKey (cr => cr.EmployeeID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //ComplainceReport and User (One-to-Many)
-            modelBuilder.Entity<ComplainceReport>()
-                .HasOne(cr => cr.GeneratedByUser)
-                .WithMany()
-                .HasForeignKey(cr => cr.GeneratedBy)
-                .OnDelete(DeleteBehavior.Restrict);
-
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-OI4VCQF\\SQLEXPRESS;Database=PayGenix;" + "Trusted_Connection=True;Integrated Security= True;TrustServerCertificate=True;");
-            base.OnConfiguring(optionsBuilder);
+            var configBuilder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var configSection = configBuilder.GetSection("ConnectionStrings");
+            var conStr = configSection["ConStr"] ?? null;
+            optionsBuilder.UseSqlServer(conStr);
         }
 
         public DbSet<User> User { get; set; }
@@ -78,7 +75,7 @@ namespace Paygenix.Models
 
         public DbSet<Payroll> Payrolls { get; set; }
 
-        public DbSet<Benefit> Benefits { get; set; }
+        public DbSet<Benefits> Benefits { get; set; }
 
         public DbSet<ComplainceReport> ComplainceReports { get; set; }
 

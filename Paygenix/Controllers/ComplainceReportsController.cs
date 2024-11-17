@@ -67,7 +67,6 @@ namespace Paygenix.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeID", "Email", complainceReport.EmployeeID);
-            ViewData["GeneratedBy"] = new SelectList(_context.User, "UserID", "PasswordHash", complainceReport.GeneratedBy);
             return View(complainceReport);
         }
 
@@ -85,7 +84,6 @@ namespace Paygenix.Controllers
                 return NotFound();
             }
             ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeID", "Email", complainceReport.EmployeeID);
-            ViewData["GeneratedBy"] = new SelectList(_context.User, "UserID", "PasswordHash", complainceReport.GeneratedBy);
             return View(complainceReport);
         }
 
@@ -122,7 +120,6 @@ namespace Paygenix.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EmployeeID"] = new SelectList(_context.Employee, "EmployeeID", "Email", complainceReport.EmployeeID);
-            ViewData["GeneratedBy"] = new SelectList(_context.User, "UserID", "PasswordHash", complainceReport.GeneratedBy);
             return View(complainceReport);
         }
 

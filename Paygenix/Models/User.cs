@@ -24,8 +24,6 @@ namespace Paygenix.Models
         public DateTime CreatedDate { get; set; } 
         [DataType( DataType.Date )]
         public DateTime? LastLogin { get; set; }  
-
-        [ForeignKey("RoleID")]
         public Role Role { get; set; }  // Navigation property to Role
     }
 }

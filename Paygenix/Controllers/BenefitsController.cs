@@ -53,7 +53,7 @@ namespace Paygenix.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BenefitID,BenefitName,Description,EligibilityCriteria")] Benefit benefit)
+        public async Task<IActionResult> Create([Bind("BenefitID,BenefitName,Description,EligibilityCriteria")] Benefits benefit)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Paygenix.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BenefitID,BenefitName,Description,EligibilityCriteria")] Benefit benefit)
+        public async Task<IActionResult> Edit(int id, [Bind("BenefitID,BenefitName,Description,EligibilityCriteria")] Benefits benefit)
         {
             if (id != benefit.BenefitID)
             {

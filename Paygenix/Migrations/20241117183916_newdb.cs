@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Paygenix.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDB : Migration
+    public partial class newdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,7 +59,7 @@ namespace Paygenix.Migrations
                         column: x => x.RoleID,
                         principalTable: "Role",
                         principalColumn: "RoleID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,8 +99,8 @@ namespace Paygenix.Migrations
                     ComplianceStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IssuesFound = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ResolvedStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GeneratedBy = table.Column<int>(type: "int", nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GeneratedByUserUserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,10 +109,11 @@ namespace Paygenix.Migrations
                         name: "FK_ComplainceReports_Employee_EmployeeID",
                         column: x => x.EmployeeID,
                         principalTable: "Employee",
-                        principalColumn: "EmployeeID");
+                        principalColumn: "EmployeeID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ComplainceReports_User_GeneratedBy",
-                        column: x => x.GeneratedBy,
+                        name: "FK_ComplainceReports_User_GeneratedByUserUserID",
+                        column: x => x.GeneratedByUserUserID,
                         principalTable: "User",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
@@ -210,14 +211,16 @@ namespace Paygenix.Migrations
                 column: "EmployeeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComplainceReports_GeneratedBy",
+                name: "IX_ComplainceReports_GeneratedByUserUserID",
                 table: "ComplainceReports",
-                column: "GeneratedBy");
+                column: "GeneratedByUserUserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employee_UserID",
                 table: "Employee",
-                column: "UserID");
+                column: "UserID",
+                unique: true,
+                filter: "[UserID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeBenefits_BenefitID",

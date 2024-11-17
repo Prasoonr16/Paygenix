@@ -33,10 +33,6 @@ namespace Paygenix.Models
 
             public DateTime HireDate { get; set; } 
 
-            public int? UserID { get; set; }  // Foreign Key to User 
-
-            [ForeignKey("UserID")]
-           
             public User User { get; set; }  // Navigation property to User
 
     }

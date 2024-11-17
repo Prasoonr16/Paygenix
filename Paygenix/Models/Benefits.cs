@@ -2,7 +2,7 @@
 
 namespace Paygenix.Models
 {
-    public class Benefit
+    public class Benefits
     {
         [Key]
         public int BenefitID { get; set; }  // Primary Key

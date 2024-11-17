@@ -18,6 +18,6 @@ namespace Paygenix.Models
 
         // Navigation Properties
         public Employee Employee { get; set; }  
-        public Benefit Benefit { get; set; }  
+        public Benefits Benefit { get; set; }  
     }
 }

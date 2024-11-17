@@ -22,7 +22,7 @@ namespace Paygenix.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Paygenix.Models.Benefit", b =>
+            modelBuilder.Entity("Paygenix.Models.Benefits", b =>
                 {
                     b.Property<int>("BenefitID")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace Paygenix.Migrations
                     b.Property<int?>("EmployeeID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GeneratedBy")
+                    b.Property<int>("GeneratedByUserUserID")
                         .HasColumnType("int");
 
                     b.Property<string>("IssuesFound")
@@ -90,7 +90,7 @@ namespace Paygenix.Migrations
 
                     b.HasIndex("EmployeeID");
 
-                    b.HasIndex("GeneratedBy");
+                    b.HasIndex("GeneratedByUserUserID");
 
                     b.ToTable("ComplainceReports");
                 });
@@ -338,8 +338,8 @@ namespace Paygenix.Migrations
 
                     b.HasOne("Paygenix.Models.User", "GeneratedByUser")
                         .WithMany()
-                        .HasForeignKey("GeneratedBy")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("GeneratedByUserUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
@@ -358,7 +358,7 @@ namespace Paygenix.Migrations
 
             modelBuilder.Entity("Paygenix.Models.EmployeeBenefit", b =>
                 {
-                    b.HasOne("Paygenix.Models.Benefit", "Benefit")
+                    b.HasOne("Paygenix.Models.Benefits", "Benefit")
                         .WithMany("EmployeeBenefits")
                         .HasForeignKey("BenefitID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -408,7 +408,7 @@ namespace Paygenix.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Paygenix.Models.Benefit", b =>
+            modelBuilder.Entity("Paygenix.Models.Benefits", b =>
                 {
                     b.Navigation("EmployeeBenefits");
                 });

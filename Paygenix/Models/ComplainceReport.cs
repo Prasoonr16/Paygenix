@@ -23,8 +23,6 @@ namespace Paygenix.Models
         
         public string ResolvedStatus { get; set; }  
 
-        public int GeneratedBy { get; set; }  // Foreign Key to User who generated the report
-
         public string Comments { get; set; }  
 
         //Navigation Properties
