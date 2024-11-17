@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Paygenix.Models.ComplainceReport>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReportDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayrollIssued)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComplianceStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IssuesFound)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResolvedStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GeneratedByUser)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayrollIssued)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComplianceStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssuesFound)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResolvedStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GeneratedByUser.PasswordHash)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReportID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReportID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReportID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

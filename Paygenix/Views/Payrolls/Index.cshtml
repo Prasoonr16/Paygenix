@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Paygenix.Models.Payroll>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BasicSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravellingAllowance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GrossPay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TDS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ESI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deduction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetPay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartPeriod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndPeriod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GeneratedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasicSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravellingAllowance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrossPay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TDS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ESI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deduction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetPay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartPeriod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndPeriod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GeneratedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PayrollID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PayrollID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PayrollID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

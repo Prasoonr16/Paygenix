@@ -16,10 +16,8 @@ namespace Paygenix.Models
 
         public DateTime EnrolledDate { get; set; }  
 
-        [ForeignKey("EmployeeID")]
-        public Employee Employee { get; set; }  // Navigation property to Employee
-
-        [ForeignKey("BenefitID")]
-        public Benefit Benefit { get; set; }  // Navigation property to Benefit
+        // Navigation Properties
+        public Employee Employee { get; set; }  
+        public Benefit Benefit { get; set; }  
     }
 }
