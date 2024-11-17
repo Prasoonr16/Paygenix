@@ -31,13 +31,7 @@ namespace Paygenix.Models
             [MaxLength(50)]
             public string Department { get; set; } 
 
-            public DateTime HireDate { get; set; } 
-
-            public int? UserID { get; set; }  // Foreign Key to User 
-
-            [ForeignKey("UserID")]
-           
-            public User User { get; set; }  // Navigation property to User
+            public DateTime HireDate { get; set; }
 
     }
 }
